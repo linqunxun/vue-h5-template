@@ -16,6 +16,7 @@
 [nvm-windows](https://github.com/coreybutler/nvm-windows) 在同一台电脑中管理多个 Node 版本。
 
 本示例 Node.js 12.14.1
+### 高版本报错  建议使用上述版本！
 
 ### 启动项目
 

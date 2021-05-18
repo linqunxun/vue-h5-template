@@ -31,5 +31,10 @@ export const constantRouterMap = [
         meta: { title: '登录', keepAlive: false }
       }
     ]
+  },
+  {
+    path: '/check/in',
+    component: () => import('@/views/home/checkIn/index'),
+    meta: { title: '每日签到', keepAlive: false }
   }
 ]
