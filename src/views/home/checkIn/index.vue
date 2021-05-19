@@ -2,7 +2,7 @@
   <div class="check-in">
     <div class="up-container">
       <div class="navigator">
-        <img class="angle-icon" src="../../../assets/angle-left.png" />
+        <img @click="back" class="angle-icon" src="../../../assets/angle-left.png" />
         <span class="navigator-title">签到</span>
       </div>
       <div class="rule-button">
@@ -46,6 +46,11 @@ export default {
     return {
       checkList: ['2021-05-01', '2021-05-03', '2021-05-04', '2021-05-05', '2021-05-10'],
       backgroundImageSize
+    }
+  },
+  methods: {
+    back() {
+      this.$router.go(-1)
     }
   }
 }

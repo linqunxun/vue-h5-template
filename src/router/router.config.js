@@ -36,5 +36,10 @@ export const constantRouterMap = [
     path: '/check/in',
     component: () => import('@/views/home/checkIn/index'),
     meta: { title: '每日签到', keepAlive: false }
+  },
+  {
+    path: '/activity',
+    component: () => import('@/views/home/activity/index'),
+    meta: { title: '活动列表', keepAlive: false }
   }
 ]
