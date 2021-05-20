@@ -35,18 +35,23 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     Toast.clear()
-    const res = response.data
-    if (res.status && res.status !== 200) {
-      // 登录超时,重新登录
-      if (res.status === 401) {
-        store.dispatch('FedLogOut').then(() => {
-          location.reload()
-        })
-      }
-      return Promise.reject(res || 'error')
+    let res = response.data;
+    if (res.retcode && res.retcode !== 0) {
+      return Promise.reject(res)
     } else {
       return Promise.resolve(res)
     }
+    // if (res.status && res.status !== 200) {
+    //   // 登录超时,重新登录
+    //   if (res.status === 401) {
+    //     store.dispatch('FedLogOut').then(() => {
+    //       location.reload()
+    //     })
+    //   }
+    //   return Promise.reject(res || 'error')
+    // } else {
+    //   return Promise.resolve(res)
+    // }
   },
   error => {
     Toast.clear()

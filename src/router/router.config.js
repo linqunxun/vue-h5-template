@@ -33,6 +33,12 @@ export const constantRouterMap = [
     ]
   },
   {
+    path: '/customer/auth',
+    name: 'CustomerAuth',
+    component: () => import('@/views/customer/auth'),
+    meta: { title: '授权', keepAlive: false }
+  },
+  {
     path: '/check/in',
     component: () => import('@/views/home/checkIn/index'),
     meta: { title: '每日签到', keepAlive: false }

@@ -17,8 +17,16 @@ export default {
   },
 
   computed: {},
+  watch: {
+    username(value){
+      localStorage.username = value
+    }
+  },
 
   mounted() {
+    if(localStorage.username){
+      this.username = localStorage.username
+    }
     this.checkCode();
   },
 
@@ -29,19 +37,14 @@ export default {
       if(code){
         userLogin({code: code}).then(res=>{
           console.log(res)
-          localStorage.setItem("token", res.token)
-          localStorage.setItem("username", res.username)
-          
-          location.replace(location.href.replace(location.search, ""))
+          localStorage.token = res.token
+          this.username = res.username
         })
       }
     },
     login() {
-      let token = localStorage.getItem("token")
-      if(token){
-        this.username = localStorage.getItem("username")
-      }else {
-        window.location.href = 'http://localhost:8080/wechat/auth?redirect=' + encodeURIComponent("http://engineering.linqunxun.com/#/login")
+      if(!localStorage.token){
+        window.location.href = 'http://localhost:8080/wechat/auth?redirect=' + encodeURIComponent("http://engineering.linqunxun.com/login")
       }
     },
   }
