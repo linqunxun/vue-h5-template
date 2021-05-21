@@ -1,13 +1,13 @@
 <template>
   <div class="check-days">
     <div class="check-in-bonus">
-      <p>已连续签到</p>
+      <p>本月已签到</p>
       <p class="day">1</p>
       <p>天</p>
     </div>
     <ul class="day-list">
       <li v-for="(itm, idx) in mockData" :key="idx" :class="(idx + 1) % 4 !== 0 ? 'mg-right' : ''">
-        <reward v-if="collapse || idx < 8" :isComplete="itm.state === 1" :day="itm.day" />
+        <reward v-if="collapse || idx < 8" :isComplete="itm.state === 1" :day="itm.day" :points="itm.points" />
       </li>
     </ul>
     <div class="angle-container">
@@ -25,50 +25,19 @@
 <script>
 import Reward from './reward'
 export default {
+  props: {
+    mockData: {
+      type: Array,
+      default: () => [],
+      required: false
+    }
+  },
   name: 'CheckDays',
   components: {
     Reward
   },
   data() {
     return {
-      mockData: [
-        {
-          day: 1,
-          state: 1
-        },
-        {
-          day: 2,
-          state: 1
-        },
-        {
-          day: 3,
-          state: 1
-        },
-        {
-          day: 4,
-          state: 1
-        },
-        {
-          day: 5,
-          state: 1
-        },
-        {
-          day: 6,
-          state: 0
-        },
-        {
-          day: 7,
-          state: 0
-        },
-        {
-          day: 8,
-          state: 0
-        },
-        {
-          day: 9,
-          state: 0
-        }
-      ],
       collapse: false
     }
   }

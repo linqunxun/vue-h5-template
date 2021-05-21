@@ -2,7 +2,7 @@
   <div class="reward" :class="isComplete ? 'active-bg' : 'un-active-bg'">
     <p class="day" :class="isComplete ? 'active-text' : 'un-active-day'">第{{ day }}天</p>
     <img class="icon" :src="isComplete ? icons.completeIcon : icons.unCompleteIcon" />
-    <p :class="isComplete ? 'active-text' : 'un-active-reward-value'" class="reward-value">10金币</p>
+    <p :class="isComplete ? 'active-text' : 'un-active-reward-value'" class="reward-value">{{points}}积分</p>
   </div>
 </template>
 
@@ -19,6 +19,11 @@ export default {
     isComplete: {
       type: Boolean,
       default: () => false,
+      required: true
+    },
+    points: {
+      type: Number,
+      default: () => 0,
       required: true
     }
   },

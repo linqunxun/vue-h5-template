@@ -35,16 +35,13 @@ export default {
 
       if(code){
         auth({eid: eid, ak: ak, code: code})
-          .then(res => {
-            // 授权成功
-            that.$router.replace({name:"Home"});
-          })
+          .then(res => that.$router.replace({name:"Home"}))
           .catch(err => {
             alert(err.msg);
           });
       }else {
         getAuthUrl({redirect: `${config.baseUrl}/employee/auth?eid=${eid}&ak=${ak}`})
-          .then(res => window.location.href = res)
+          .then(res => window.location.href = res.result)
           .catch(err => {
             alert(err.msg);
           });

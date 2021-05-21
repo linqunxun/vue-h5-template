@@ -1,5 +1,6 @@
 import axios from 'axios'
 import store from '@/store'
+import router from "@/router";
 import { Toast } from 'vant'
 // 根据环境不同引入不同api地址
 import { baseApi } from '@/config'
@@ -20,8 +21,8 @@ service.interceptors.request.use(
         forbidClick: true
       })
     }
-    if (store.getters.token) {
-      config.headers['X-Token'] = ''
+    if (localStorage.token) {
+      config.headers["Authorization"] = "Basic " + localStorage.token;
     }
     return config
   },
@@ -36,22 +37,13 @@ service.interceptors.response.use(
   response => {
     Toast.clear()
     let res = response.data;
-    if (res.retcode && res.retcode !== 0) {
+    if (res.retcode && res.retcode === 10002) {
+      router.replace("/login?redirect=" + location.pathname + location.search);
+    } else if (res.retcode && res.retcode !== 0) {
       return Promise.reject(res)
     } else {
       return Promise.resolve(res)
     }
-    // if (res.status && res.status !== 200) {
-    //   // 登录超时,重新登录
-    //   if (res.status === 401) {
-    //     store.dispatch('FedLogOut').then(() => {
-    //       location.reload()
-    //     })
-    //   }
-    //   return Promise.reject(res || 'error')
-    // } else {
-    //   return Promise.resolve(res)
-    // }
   },
   error => {
     Toast.clear()

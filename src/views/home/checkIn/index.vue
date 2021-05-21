@@ -2,24 +2,27 @@
   <div class="check-in">
     <div class="up-container">
       <div class="navigator">
-        <img @click="back" class="angle-icon" src="../../../assets/angle-left.png" />
-        <span class="navigator-title">签到</span>
+<!--        <img @click="back" class="angle-icon" src="../../../assets/angle-left.png" />-->
+<!--        <span class="navigator-title">签到</span>-->
       </div>
-      <div class="rule-button">
+      <div class="points-button" @click="showPointsDesc">
+        <p>积分兑换</p>
+      </div>
+      <div class="rule-button" @click="showRuleDesc">
         <p>签到规则</p>
       </div>
       <div class="today-check">
         <img class="check-label-image" src="../../../assets/checkLabel.png" />
         <div class="my-integration">
           <img src="../../../assets/drawDemond.png" class="demond-icon" />
-          <span class="integration">积分：</span>
+          <span class="integration">积分:</span>
           <span class="integration-value">100</span>
         </div>
-        <p class="integration-rank">总签到： 20人， 您第8位签到。</p>
+        <p class="integration-rank">今日总签到20人，您排在第8位！</p>
       </div>
     </div>
     <div class="check-day-container">
-      <check-days />
+      <check-days :mock-data="mockData"/>
     </div>
     <div class="calendar-container">
       <calendar :check-in-list="checkList" />
@@ -30,6 +33,8 @@
 </template>
 
 <script>
+import {Dialog} from "vant";
+
 const backgroundImageSize = {
   width: 750,
   height: 598
@@ -44,13 +49,66 @@ export default {
   },
   data() {
     return {
+      pointsDesc: "积分可以兑换丰厚的礼品，请在群里添加【服务助手】为好友进行兑换！",
+      ruleDesc: "✌️✌️签到赢积分✌️✌️️",
+      show: false,
       checkList: ['2021-05-01', '2021-05-03', '2021-05-04', '2021-05-05', '2021-05-10'],
+      mockData: [
+        {
+          day: 1,
+          state: 1,
+          points: 5
+        },
+        {
+          day: 2,
+          state: 1,
+          points: 5
+        },
+        {
+          day: 3,
+          state: 1,
+          points: 5
+        },
+        {
+          day: 4,
+          state: 1,
+          points: 5
+        },
+        {
+          day: 5,
+          state: 1,
+          points: 10
+        },
+        {
+          day: 6,
+          state: 0,
+          points: 5
+        },
+        {
+          day: 7,
+          state: 0,
+          points: 5
+        },
+        {
+          day: 8,
+          state: 0,
+          points: 5
+        },
+        {
+          day: 9,
+          state: 0,
+          points: 5
+        }
+      ],
       backgroundImageSize
     }
   },
   methods: {
-    back() {
-      this.$router.go(-1)
+    showPointsDesc(){
+      Dialog({ title: "积分兑换", message: this.pointsDesc });
+    },
+    showRuleDesc(){
+      Dialog({ title: "签到规则", message: this.ruleDesc });
     }
   }
 }
@@ -70,7 +128,7 @@ export default {
     position: relative;
     .navigator {
       width: 100%;
-      height: 50px;
+      height: 25px;
       @include flexbox($ai: center, $jc: center);
       position: relative;
       .angle-icon {
@@ -83,8 +141,23 @@ export default {
         color: #ffffff;
       }
     }
+    .points-button {
+      width: 80px;
+      height: 32px;
+      @include flexbox($ai: center, $jc: center);
+      background-color: rgba(0, 0, 0, 0.16);
+      font-size: 14px;
+      color: #ffffff;
+      border-radius: 100px 0 0 100px;
+      right: 0;
+      top: 15px;
+      position: absolute;
+      p {
+        margin: 0;
+      }
+    }
     .rule-button {
-      width: 90px;
+      width: 80px;
       height: 32px;
       @include flexbox($ai: center, $jc: center);
       background-color: rgba(0, 0, 0, 0.16);

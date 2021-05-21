@@ -1,8 +1,8 @@
 <template>
   <div class="ms-calendar">
     <div class="month">
-      <span>{{ monthEn[month] }}</span>
-      <span>{{ year }}</span>
+      <span>{{ year }}年</span>
+      <span>{{ month }}月</span>
     </div>
     <div class="week">
       <p v-for="(item, index) in weekDay" :key="index">{{ item }}</p>
@@ -20,20 +20,6 @@
 
 <script>
 const timestamp = 24 * 60 * 60 * 1000
-const monthEn = {
-  1: 'Jan',
-  2: 'Feb',
-  3: 'Mar',
-  4: 'Apr',
-  5: 'May',
-  6: 'Jun',
-  7: 'Jul',
-  8: 'Aug',
-  9: 'Sep',
-  10: 'Oct',
-  11: 'Nov',
-  12: 'Dec'
-}
 export default {
   data() {
     return {
@@ -41,8 +27,7 @@ export default {
       weekDay: ['日', '一', '二', '三', '四', '五', '六'],
       year: '',
       month: '',
-      day: '',
-      monthEn
+      day: ''
     }
   },
   props: {

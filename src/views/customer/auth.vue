@@ -5,7 +5,6 @@
 <script>
 import {authByCustomer, getAuthUrl} from "api/wx_mp";
 let config = require('../../config');
-let auth = authByCustomer;
 
 export default {
   data() {
@@ -34,17 +33,14 @@ export default {
       }
 
       if(code){
-        auth({uid: uid, ak: ak, code: code})
-          .then(res => {
-            // 授权成功
-            that.$router.replace({name:"Home"});
-          })
+        authByCustomer({uid: uid, ak: ak, code: code})
+          .then(res => that.$router.replace(`/customer?ak=${ak}`))
           .catch(err => {
             alert(err.msg);
           });
       }else {
         getAuthUrl({redirect: `${config.baseUrl}/customer/auth?uid=${uid}&ak=${ak}`})
-          .then(res => window.location.href = res)
+          .then(res => window.location.href = res.result)
           .catch(err => {
             alert(err.msg);
           });
